@@ -1,0 +1,77 @@
+For 0.2
+Time taken 17.983
+Producer time 2.15e-06
+Consumer time 0.00868451
+Time taken 17.9346
+Producer time 1.37e-06
+Consumer time 0.00880743
+For 0.4
+Time taken 17.8904
+Producer time 2.35e-06
+Consumer time 0.019553
+Time taken 18.0365
+Producer time 1.4e-06
+Consumer time 0.018791
+For 0.8
+Time taken 18.6355
+Producer time 4.14e-06
+Consumer time 0.0413446
+Time taken 18.2364
+Producer time 2.88e-06
+Consumer time 0.0435606
+For 1.2
+Time taken 19.3482
+Producer time 2.36e-06
+Consumer time 0.0875655
+Time taken 18.4361
+Producer time 4.16e-06
+Consumer time 0.0768925
+For 1.6
+Time taken 19.0294
+Producer time 3.69e-06
+Consumer time 0.150276
+Time taken 18.7922
+Producer time 1.65e-06
+Consumer time 0.137869
+For 2
+Time taken 19.3614
+Producer time 2.11e-06
+Consumer time 0.224317
+Time taken 20.2882
+Producer time 1.49e-06
+Consumer time 0.238513
+For 4
+Time taken 35.9467
+Producer time 2.18e-06
+Consumer time 1.47158
+Time taken 35.8024
+Producer time 1.78e-06
+Consumer time 1.72873
+For 8
+Time taken 72.1308
+Producer time 2.76e-06
+Consumer time 4.23624
+Time taken 72.5829
+Producer time 1.35e-06
+Consumer time 5.00351
+For 12
+Time taken 108.236
+Producer time 3.84e-06
+Consumer time 7.26563
+Time taken 108.818
+Producer time 1.57e-06
+Consumer time 8.13856
+For 16
+Time taken 142.769
+Producer time 8.19e-06
+Consumer time 9.36414
+Time taken 143.897
+Producer time 1.34e-06
+Consumer time 11.3794
+For 20
+Time taken 180.129
+Producer time 3.28e-06
+Consumer time 12.7646
+Time taken 180.132
+Producer time 1.36e-06
+Consumer time 14.6516
