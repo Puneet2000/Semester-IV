@@ -1,0 +1,22 @@
+----------------------------------PROBLEM STATEMENT 2----------------------------------------
+- While running ./runtest.sh, all test cases were not passing. So We checked each of them individually. Following is the report for same.
+
+PASS - Test 1 : Same process writing and reading using syscalls
+PASS - Test 3 : One process writing using syscall and other process reading using syscall
+PASS - Test 5 : One process writing using mapping and other process reading using syscall
+PASS - Test 7 : One process writing to one shm and other process reading from another shm
+
+For test 2, following error shows up:
+	mismatch of data. off=4096
+	cmpbuf: e
+	buf   : t
+
+For test 4 :
+	mismatch of data. off=4096
+	cmpbuf: e
+	buf   : t
+
+For test 5 :
+	mismatch of data. off=4096
+	cmpbuf: e
+	buf   : '

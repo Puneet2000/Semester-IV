@@ -1,4 +1,0 @@
-Number of Processes : 100
-Number of completed processes : 9
-Number of processes that missed deadlines : 91
-Average waiting time :44.07

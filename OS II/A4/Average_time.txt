@@ -1,2 +1,0 @@
-Average time in fair reader-wrters is 589.071220 miliseconds
-Average time in standard reader-wrters is 1540.155835 miliseconds

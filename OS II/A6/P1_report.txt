@@ -1,0 +1,176 @@
+----------------------------------PROBLEM STATEMENT 1----------------------------------------
+                                  ** Experiment 2 **
+
+a.  
+    (i) ```Pmap for process 1```
+
+      	3986:   ./a.out
+      	0000000000400000      4K r-x-- a.out
+      	0000000000600000      4K r---- a.out
+      	0000000000601000      4K rw--- a.out
+      	00007fd12b3d4000   1800K r-x-- libc-2.17.so
+      	00007fd12b596000   2048K ----- libc-2.17.so
+      	00007fd12b796000     16K r---- libc-2.17.so
+      	00007fd12b79a000      8K rw--- libc-2.17.so
+      	00007fd12b79c000     20K rw---   [ anon ]
+      	00007fd12b7a1000    136K r-x-- ld-2.17.so
+      	00007fd12b9b9000     12K rw---   [ anon ]
+      	00007fd12b9bf000     12K rw---   [ anon ]
+      	00007fd12b9c2000      4K r---- ld-2.17.so
+      	00007fd12b9c3000      4K rw--- ld-2.17.so
+      	00007fd12b9c4000      4K rw---   [ anon ]
+      	00007ffd1b68f000    132K rw---   [ stack ]
+      	00007ffd1b794000      8K r-x--   [ anon ]
+      	ffffffffff600000      4K r-x--   [ anon ]
+      	 total             4220K
+
+	 (ii)  ```Pmap for process 2```
+
+        	4031:   ./a.out
+        	0000000000400000      4K r-x-- a.out
+        	0000000000600000      4K r---- a.out
+        	0000000000601000      4K rw--- a.out
+        	00007fc90cd7e000   1800K r-x-- libc-2.17.so
+        	00007fc90cf40000   2048K ----- libc-2.17.so
+        	00007fc90d140000     16K r---- libc-2.17.so
+        	00007fc90d144000      8K rw--- libc-2.17.so
+        	00007fc90d146000     20K rw---   [ anon ]
+        	00007fc90d14b000    136K r-x-- ld-2.17.so
+        	00007fc90d363000     12K rw---   [ anon ]
+        	00007fc90d369000     12K rw---   [ anon ]
+        	00007fc90d36c000      4K r---- ld-2.17.so
+        	00007fc90d36d000      4K rw--- ld-2.17.so
+        	00007fc90d36e000      4K rw---   [ anon ]
+        	00007ffd4379e000    132K rw---   [ stack ]
+        	00007ffd437ed000      8K r-x--   [ anon ]
+        	ffffffffff600000      4K r-x--   [ anon ]
+        	 total             4220K
+
+b.	 	KERNEL: /usr/lib/debug/lib/modules/3.10.0-957.el7.x86_64/vmlinux 
+    	DUMPFILE: /dev/crash
+        CPUS: 1
+        DATE: Sat Apr 20 12:05:41 2019
+      	UPTIME: 00:20:39
+		LOAD AVERAGE: 0.16, 0.05, 0.06
+       	TASKS: 121
+    	NODENAME: localhost.localdomain
+     	RELEASE: 3.10.0-957.el7.x86_64
+     	VERSION: #1 SMP Thu Nov 8 23:39:32 UTC 2018
+     	MACHINE: x86_64  (2903 Mhz)
+      	MEMORY: 1 GB
+        PID: 4042
+     	COMMAND: "crash"
+        TASK: ffff97ecb64ca080  [THREAD_INFO: ffff97ecbdbcc000]
+        CPU: 0
+       	STATE: TASK_RUNNING (ACTIVE)
+
+c. 
+    1.  ```ps command```
+	__________________________________________________________________
+	PID    PPID  CPU       TASK        ST  %MEM     VSZ    RSS  COMM
+	__________________________________________________________________
+	3986   3946   0  ffff97ecb68130c0  IN   0.0    4216    468  a.out
+	4031   4013   0  ffff97ecbbacd140  IN   0.0    4216    472  a.out
+	__________________________________________________________________
+
+	2.   ```vm -m command```
+
+	   (i) PID: 3986   TASK: ffff97ecb68130c0  CPU: 0   COMMAND: "a.out"
+    	   struct mm_struct {
+      		mmap = 0xffff97ecb9dfaa20, 
+      		mm_rb = {
+        	rb_node = 0xffff97ecb9dfa458
+      	}, 
+      	mmap_cache = 0xffff97ecb9dfabd0, 
+      	get_unmapped_area = 0xffffffff82830e90, 
+      	unmap_area = 0xffffffff829f0d20, 
+      	mmap_base = 140536356556800, 
+      	mmap_legacy_base = 47096313831424, 
+      	task_size = 140737488351232, 
+      	cached_hole_size = 0, 
+      	free_area_cache = 140536356556800, 
+      	highest_vm_end = 140725064392704, 
+      	pgd = 0xffff97ecba084000, 
+
+    (ii)  PID: 4031   TASK: ffff97ecbbacd140  CPU: 0   COMMAND: "a.out"
+          struct mm_struct {
+            mmap = 0xffff97ecbb873bd0, 
+            mm_rb = {
+              rb_node = 0xffff97ecbb873cc8
+          }, 
+          mmap_cache = 0xffff97ecbb873360, 
+          get_unmapped_area = 0xffffffff82830e90, 
+          unmap_area = 0xffffffff829f0d20, 
+          mmap_base = 140501486858240, 
+          mmap_legacy_base = 47131183529984, 
+          task_size = 140737488351232, 
+          cached_hole_size = 0, 
+          free_area_cache = 140501486858240, 
+          highest_vm_end = 140725735845888, 
+          pgd = 0xffff97ecb9df8000, 
+  
+  3.  ```vm -p``` command
+
+      (i) PID: 3986   TASK: ffff97ecb68130c0  CPU: 0   COMMAND: "a.out"
+                 MM               PGD          RSS    TOTAL_VM
+          ffff97ecba2dabc0  ffff97ecba084000   468k    4216k  
+                VMA           START       END     FLAGS FILE
+          ffff97ecb9dfaa20     400000     401000 8000875 /root/a.out
+          VIRTUAL     PHYSICAL
+          400000       71d4000
+                VMA           START       END     FLAGS FILE
+          ffff97ecb9dfa0d8     600000     601000 8100871 /root/a.out
+          VIRTUAL     PHYSICAL
+          600000       70ba000
+                VMA           START       END     FLAGS FILE
+          ffff97ecb9dfa6c0     601000     602000 8100873 /root/a.out
+          VIRTUAL     PHYSICAL
+          601000       6cbb000
+                VMA           START       END     FLAGS FILE
+          ffff97ecb9dfae58 7fd12b3d4000 7fd12b596000 8000075 /usr/lib64/libc-2.17.so
+          VIRTUAL     PHYSICAL
+          7fd12b3d4000  3ff26000
+          7fd12b3d5000  3ff27000
+          7fd12b3d6000  36388000
+          7fd12b3d7000  36389000
+          7fd12b3d8000  315ae000
+          7fd12b3d9000  315af000
+          7fd12b3da000  30d78000
+          7fd12b3db000  30d79000
+          7fd12b3dc000  30d7a000
+          7fd12b3dd000  30d7b000
+          ...
+
+      (ii)  PID: 4031   TASK: ffff97ecbbacd140  CPU: 0   COMMAND: "a.out"
+                   MM               PGD          RSS    TOTAL_VM
+            ffff97ecb9fda580  ffff97ecb9df8000   472k    4216k  
+                  VMA           START       END     FLAGS FILE
+            ffff97ecbb873bd0     400000     401000 8000875 /root/a.out
+            VIRTUAL     PHYSICAL
+            400000       71d4000
+                  VMA           START       END     FLAGS FILE
+            ffff97ecbb873e58     600000     601000 8100871 /root/a.out
+            VIRTUAL     PHYSICAL
+            600000       acdb000
+                  VMA           START       END     FLAGS FILE
+            ffff97ecbb873af8     601000     602000 8100873 /root/a.out
+            VIRTUAL     PHYSICAL
+            601000       7381000
+                  VMA           START       END     FLAGS FILE
+            ffff97ecbb8731b0 7fc90cd7e000 7fc90cf40000 8000075 /usr/lib64/libc-2.17.so
+            VIRTUAL     PHYSICAL
+            7fc90cd7e000  3ff26000
+            7fc90cd7f000  3ff27000
+            7fc90cd80000  36388000
+            7fc90cd81000  36389000
+            7fc90cd82000  315ae000
+            7fc90cd83000  315af000
+            7fc90cd84000  30d78000
+            7fc90cd85000  30d79000
+            7fc90cd86000  30d7a000
+            7fc90cd87000  30d7b000
+            7fc90cd88000  30da4000
+            ...
+
+      **Observation** :  It can be verified that the physical frames for libc*.so is same for both processes
+                        because it is shared object file.

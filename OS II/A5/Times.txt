@@ -1,2 +1,0 @@
-Average time is 688.329810 miliseconds
-Worst case time is 26.109115 miliseconds
