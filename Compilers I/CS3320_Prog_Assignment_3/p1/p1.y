@@ -50,7 +50,7 @@ int main()
 %type<ch> PIECE 
 
 %%
-program : turn SPACE turn LINE program | turn SPACE turn {display();};
+program : turn SPACE turn LINE program | turn SPACE turn {display();}| turn SPACE turn LINE {display();};
 turn : move_piece | capture_piece | move_pawn | promote | capture_pawn;
 move_piece : PIECE COLUMN ROW MOVE COLUMN ROW {make_turn(0,$2,$3,$5,$6);};
 capture_piece : PIECE COLUMN ROW CAPTURE COLUMN ROW {make_turn(0,$2,$3,$5,$6);};

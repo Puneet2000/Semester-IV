@@ -1,21 +1,34 @@
-Roll No.:
-Name:
+Roll No.: CS17BTECH11029
+Name: Puneet Mangla2
 
 --------------------------------------------------------------------------------
 
 P1: Chess
 ---------
 Assumptions / Comments (if any):
+1. Input given is correct and requires no semantic/logical check.
+2. The black and white turns are seperated by only spaces not by any other whitespaces.
+3. Last command in input file should follow by at most one new line.
 	
 # Is the program complete? Are there any assumptions made? Any other comments?
 
 Approach :
-# How do you solve this problem?
-
+1. Tokens/Regex are defined for PIECE (K,Q,R,B,N), COLUMN (a-h), ROW (1-8), MOVE (-), CAPTURE (x), PROMOTION (=).
+2. Whitespaces and newlines are treated as tokens (SPACE, LINE) for meeting input specs.
+3. ```turn``` is grammar variable which corresponds to differrent types of possible turns.
+4. move piece, move pawn, capture pawn, capture piece and promote are possible turns.
+5. each command looks like ```turn SPACE turn```.
+6. each commmand is seperated by a newline character (LINE token).
+7. 	```make_turn(**kwargs)``` plays a turn given the parameters.
+8. Capture and move are similar in context of ```make_turn``` function.
+9. Since input is logically correct, we just need initial and final cell of board in move and capture command.
+10. promotion command is handled specially in ```make_turn```.
+11. ```display()``` displays the board in specified format.
 
 P2: Calculator
 --------------
 Assumptions / Comments (if any):
+1. 
 	
 # Is the program complete? Are there any assumptions made? Any other comments?
 

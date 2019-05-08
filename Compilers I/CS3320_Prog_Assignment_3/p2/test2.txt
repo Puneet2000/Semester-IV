@@ -1,0 +1,16 @@
+# This specification uses three 7-segment displays connected in series
+# Display value of PI=3.14
+INIT
+Select: 1
+# a b c d e f g dp
+#Display 3 followed by decimal point
+	1	1	1	1	0	0	1	1
+Delay: 40
+Select: 2
+#Display 1
+	0	1	1	0	0	0	0	0
+Delay: 40
+Select: 3
+#Display 4
+	0	1	1	0	0	1	1	0
+Delay: 40

@@ -5,6 +5,7 @@
 %}
 
 %%
+[0-9]+"."(" ")*	;
 [KQRBN]   { c = yytext[0];
             yylval.ch = c;
             return PIECE;}
@@ -17,6 +18,6 @@
 -          return MOVE;
 "x"        return CAPTURE;
 =          return PROMOTION;
-\n		   return LINE;
+(\n)*	   return LINE;
 " "		   return SPACE;
 %%

@@ -1,0 +1,11 @@
+1. Nb1-a3 a7-a5
+2. b2-b4 a5xb4
+3. Bc1-b2 Ra8xa3
+4. Bb2xa3 b4-b3
+5. c2xc3 e7-e5
+6. Ba3xf8 Ke8-f8
+7. Ra1-c1 Nb8-a6
+8. b3-b4 Na6xb4
+9. c3xb4 d7-d5
+10. Rc1xc7 Qd8xc7
+11. Qd1-c1 Qc7xc1

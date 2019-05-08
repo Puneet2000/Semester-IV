@@ -1,68 +1,61 @@
 %{
-#include <iostream>
-%}
-
-// define the "terminal symbol" token types I'm going to use, which
-// are in CAPS only because it's a convention:
-%token INT FLOAT STRING
-
-// yacc fundamentally works by asking lex to get the next token, which it returns as
-// an object of type "yystype".  But
-// the next token could be of an arbitrary data type, so you can define a C union to
-// hold each of the types of tokens that lex could return, and yacc will typedef
-// "yystype" as the union instead of its default (int):
-%union {
-	int ival;
-	float fval;
-	char *sval;
-}
-
-// and then you just associate each of the defined token types with one of
-// the union fields and we're happy:
-%token <ival> INT
-%token <fval> FLOAT
-%token <sval> STRING
-
-%%
-// this is the actual grammar that yacc will parse, but for right now it's just
-// something silly to echo to the screen what yacc gets from lex.  We'll
-// make a real one shortly:
-snazzle:
-	INT snazzle { cout << "yacc found an int: " << $1 << endl; }
-	| FLOAT snazzle { cout << "yacc found a float: " << $1 << endl; }
-	| STRING snazzle { cout << "yacc found a string: " << $1 << endl; }
-	| INT { cout << "yacc found an int: " << $1 << endl; }
-	| FLOAT { cout << "yacc found a float: " << $1 << endl; }
-	| STRING { cout << "yacc found a string: " << $1 << endl; }
-	;
-%%
-#include <stdio.h>
-
-// stuff from lex that yacc needs to know about:
+#include<stdio.h>
+#include <string.h>
 extern int yylex();
 extern int yyparse();
-extern FILE *yyin;
-
-main() {
-	// open a file handle to a particular file:
-	FILE *myfile = fopen("a.snazzle.file", "r");
-	// make sure it is valid:
-	if (!myfile) {
-		cout << "I can't open a.snazzle.file!" << endl;
-		return -1;
-	}
-	// set lex to read from it instead of defaulting to STDIN:
-	yyin = myfile;
-	
-	// parse through the input until there is no more:
-	do {
-		yyparse();
-	} while (!feof(yyin));
-	
+void yyerror(const char* s){ 
+	printf("%s\n",s);
 }
-
-void yyerror(char *s) {
-	cout << "EEK, parse error!  Message: " << s << endl;
-	// might as well halt now:
-	exit(-1);
+int yywrap(){return 1;}
+void display_conf(char c[]){
+	printf("%s\n",c);
 }
+const char *initial = "#include<stdio.h>\n#include<stdlib.h>\n#include<seven_segment.h>\nint main()\n{\n";
+void tab(int t){
+	for(int i=0;i<t;i++)
+		printf("\t");
+}
+int ntab = 0;
+bool init = false;
+int main()
+{
+	printf("%s",initial);
+	ntab++;
+    yyparse();
+
+    if(init){
+	    ntab--;
+	    tab(ntab);
+	    printf("}\n");
+    }
+
+    ntab--;
+    tab(ntab);
+    printf("}\n");
+}
+%}
+
+%token INIT SELECT DELAY IF ELSE INT READINT CMPOP COLON INTEGER CONF LINE WHITESPACE IDENTIFIER ASSIGN
+%union { int a; char* ch; char conf[9];}
+%type<a> INTEGER
+%type<ch> IDENTIFIER CMPOP
+%type<conf> CONF 
+%start program
+
+%%
+program : stmt LINE program | stmt LINE | stmt ;
+stmt : delay_stmt | select_stmt | declaration_stmt | inp_stmt | conf_stmt | init_stmt | if_stmt;
+delay_stmt : DELAY COLON WHITESPACE INTEGER {tab(ntab);printf("delay(%d);\n",$4);};
+select_stmt :SELECT COLON WHITESPACE INTEGER {tab(ntab);printf("select(%d);\n",$4);};
+declaration_stmt : IDENTIFIER {tab(ntab);printf("int %.*s;\n",int(strlen($1))-1,$1);} COLON WHITESPACE INT ;
+inp_stmt : IDENTIFIER {tab(ntab); printf("%s = readInt();\n",$1);} WHITESPACE ASSIGN WHITESPACE READINT;
+conf_stmt : CONF {tab(ntab); printf("write(strtol(\"%s\"));\n",$1);};
+init_stmt : INIT {init=true; tab(ntab); printf("init();\n"); tab(ntab); printf("while(1)\n"); tab(ntab); printf("{\n"); ntab++;};
+if_stmt : IF {tab(ntab); printf("if(");} 
+		  WHITESPACE IDENTIFIER {printf("%s",$4);} 
+		  WHITESPACE CMPOP {printf("%s",$7);} 
+		  WHITESPACE INTEGER {printf("%d)\n",$10); tab(ntab); printf("{\n"); ntab++;} 
+		  COLON LINE stmt LINE {ntab--; tab(ntab); printf("}\n");}
+		  ELSE {tab(ntab); printf("else\n"); tab(ntab); printf("{\n"); ntab++;} 
+		  COLON LINE stmt {ntab--; tab(ntab); printf("}\n");}
+%%
