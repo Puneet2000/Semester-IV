@@ -14,8 +14,8 @@ Else:
 	0	1	1	0	0	0	0	0
 inp = readInt
 # nested if else staements
-if input >= 0:
-if inp != 5:
+if input >= inp:
+if 5 != inp:
 Select: 2
 Else:
 Delay: 100

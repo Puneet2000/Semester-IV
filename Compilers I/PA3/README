@@ -1,0 +1,51 @@
+Roll No.: CS17BTECH11029
+Name: Puneet Mangla
+
+--------------------------------------------------------------------------------
+
+P1: Chess
+---------
+Assumptions / Comments (if any):
+0. Change 4th line of Makefile to **g++ -o p1.out lex.yy.c y.tab.c -lm -ll**
+1. Input given is correct and requires no semantic/logical check.
+2. The black and white turns are seperated by exactly one space not by any other whitespaces.
+3. The command should be numbered (1., 2., 3. so on) and seperated by one or more newlines.
+
+Approach :
+1. Tokens/Regex are defined for PIECE (K,Q,R,B,N), COLUMN (a-h), ROW (1-8), MOVE (-), CAPTURE (x), PROMOTION (=).
+2. Whitespaces and newlines are treated as tokens (SPACE, LINE) for meeting input specs.
+3. ```turn``` is grammar variable which corresponds to differrent types of possible turns.
+4. move piece, move pawn, capture pawn, capture piece and promote are possible turns.
+5. each command looks like ```turn SPACE turn```.
+6. each commmand is seperated by a newline character (LINE token).
+7. 	```make_turn(**kwargs)``` plays a turn given the parameters.
+8. Capture and move are similar in context of ```make_turn``` function.
+9. Since input is logically correct, we just need initial and final cell of board in move and capture command.
+10. promotion command is handled specially in ```make_turn```.
+11. ```display()``` displays the board in specified format.
+
+P2: Calculator
+--------------
+Assumptions / Comments (if any):
+0. change 4th line in Makefile to **g++ -o p2.out lex.yy.c y.tab.c -lm -ll**.
+1. Each statement is followed by one or more newline to mark the termination.
+2. There should be exactly one space between two tokens except when it is colon there should be no spaces at all.
+3. atmost one init should be there.
+4. If should always be followed by else. No dangling if else.
+5. the identifier length should be at max 31 chars.
+7. if-else, configration, select, delay, input, declaration, init are possible statements.
+8. readInt() is only function to get user input. So RHS of assignment is identifier, readint or integer const. 
+
+Approach :
+1. The input program is assumed to consists of one or more than one statements terminated by one or more newlines.
+2. Tokens/Regex are defined of keywords like select, delay, readInt, int, init, if, else. ?i: is used for case insenstivity.
+3. identifiers are C type identifiers with length at most 31 chars.
+4. LINE is regex for atleast one newlines to mark the termination.
+5. statement is defined as any one of above valid satements.
+6. ```tab()``` functions provide the necessary indentation given ```ntab``` as argument to it.
+7. WHITESPACE is used for reperesenting exact whitespace between tokens.
+8. Configuration of 8 LED's in segment is a regex containg exactly 8 patterns which match regex \t[0-1]
+9. configuration is stored in array of char of length 9. Last index is '\0'.
+10. ```const char* initial``` stores the initial code i.e library headers and main function.
+11. If and else block should contain only one statement.
+12. a1, a2, a3 are rules to  handle indentifiers and integers for one rule.

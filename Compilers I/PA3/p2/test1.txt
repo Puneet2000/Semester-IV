@@ -17,6 +17,9 @@ input2: int
 SELECT: 2
 DeLAy: 50
 input2 = READINT
+input3: INT
+input3 = input2
+input2 = 100
 If input2 > 2:
 select: 100
 ELse:
